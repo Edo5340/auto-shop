@@ -28,7 +28,33 @@
   </article>
 
   <script>
-    
+    const laborInput = document.getElementById('labor-inp');
+    const hourlyInput = document.getElementById('hourly-inp');
+    const partsInput = document.getElementById('parts-inp');
+    const estimateButton = document.getElementById('estimate-btn');
+    const laborOutput = document.getElementById('labor-disp');
+    const partsOutput = document.getElementById('parts-disp');
+    const taxOutput = document.getElementById('tax-disp');
+    const totalOutput = document.getElementById('total-disp');
+    const validationMessage = document.getElementById('validation-disp');
+    const taxRate = 0.0775;
+
+    estimateButton.addEventListener('click', function() {
+      const laborConvNum = Number(laborInput.value);
+      const hourlyConvNum = Number(hourlyInput.value);
+      const partsConvNum = Number(partsInput.value);
+
+      if (isNaN(laborConvNum) || laborConvNum <0.1 || isNaN(hourlyConvNum) || hourlyConvNum <= 0 || partsInput.value === '' || isNaN(partsConvNum) || partsConvNum <0) {
+        validationMessage.textContent = 'Please enter a valid number!';
+      } else {
+        const laborSubtotal = laborConvNum * hourlyConvNum;
+        const taxAmount = taxRate * partsConvNum;
+        const finalTotal = laborSubtotal + partsConvNum + taxAmount;
+        laborOutput.textContent = `Labor: $${laborSubtotal.toFixed(2)}`;
+        partsOutput.textContent = `Parts: $${partsConvNum.toFixed(2)}`;
+        taxOutput.textContent = `Tax: $${taxAmount.toFixed(2)}`;
+        totalOutput.textContent = `Total: $${finalTotal.toFixed(2)}`;
+    }});
   </script>
 </body>
 </html>
