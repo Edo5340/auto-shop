@@ -45,11 +45,16 @@
       const partsConvNum = Number(partsInput.value);
 
       if (isNaN(laborConvNum) || laborConvNum <0.1 || isNaN(hourlyConvNum) || hourlyConvNum <= 0 || partsInput.value === '' || isNaN(partsConvNum) || partsConvNum <0) {
+        laborOutput.textContent = '';
+        partsOutput.textContent = '';
+        taxOutput.textContent = '';
+        totalOutput.textContent = '';
         validationMessage.textContent = 'Please enter a valid number!';
       } else {
         const laborSubtotal = laborConvNum * hourlyConvNum;
         const taxAmount = taxRate * partsConvNum;
         const finalTotal = laborSubtotal + partsConvNum + taxAmount;
+        validationMessage.textContent = '';
         laborOutput.textContent = `Labor: $${laborSubtotal.toFixed(2)}`;
         partsOutput.textContent = `Parts: $${partsConvNum.toFixed(2)}`;
         taxOutput.textContent = `Tax: $${taxAmount.toFixed(2)}`;
